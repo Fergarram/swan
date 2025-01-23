@@ -31,11 +31,11 @@ const app = div(
 Output:
 
 ```html
-<div class="container"><button data-svan-id="39d7322b-66e6-4332-9004-436f946ac50a">Click me</button></div>
+<div class="container"><button data-swan-id="39d7322b-66e6-4332-9004-436f946ac50a">Click me</button></div>
 ```
 
 ```javascript
-document.querySelector('[data-svan-id="39d7322b-66e6-4332-9004-436f946ac50a"]')
+document.querySelector('[data-swan-id="39d7322b-66e6-4332-9004-436f946ac50a"]')
 .addEventListener('click', (e) => {
     console.log("Clicked!", e)
 });
