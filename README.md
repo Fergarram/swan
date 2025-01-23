@@ -64,11 +64,11 @@ const list = ul(
 ```typescript
 const { div, p } = tags;
 
-const isLoggedIn = true;
+const is_logged_in = true;
 const username = "John";
 
 const welcome = div(
-  isLoggedIn && p(
+  is_logged_in && p(
     { class: "welcome" },
     `Welcome back, ${username}!`
   )
