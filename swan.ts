@@ -1,5 +1,6 @@
 //
 // Swan 1.0.0
+// by fergarram
 //
 
 // A lightweight system for generating HTML and JS with a component-like syntax
