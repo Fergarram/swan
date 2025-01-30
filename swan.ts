@@ -1,5 +1,5 @@
 //
-// Swan - HTML Template Engine
+// Swan 1.0.0
 //
 
 // A lightweight system for generating HTML and JS with a component-like syntax
