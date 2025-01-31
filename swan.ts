@@ -186,13 +186,7 @@ export const js = (strings: TemplateStringsArray, ...values: any[]) =>
 	strings.reduce((result, str, i) => {
 		const value = values[i];
 		if (value === undefined) return result + str;
-
-		const formatted =
-			typeof value === "string"
-				? `"${value.replace(/"/g, '\\"')}"` // Escape quotes in strings
-				: String(value);
-
-		return result + str + formatted;
+		return result + str + String(value);
 	}, "");
 
 export const css = (strings: TemplateStringsArray, ...values: any[]) =>
