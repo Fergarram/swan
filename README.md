@@ -75,18 +75,5 @@ const welcome = div(
 );
 ```
 
-### About the `js` Template Literal
-The `js` template literal is used to properly escape strings in JavaScript event handlers. For example:
-
-```typescript
-js`console.log(${username})` 
-// becomes: console.log("John")
-
-js`alert(${`Hello ${username}!`})`
-// becomes: alert("Hello John!")
-```
-
-The main reason behind this decision is to not break the syntax highlighting of code editors.
-
 ## License
 MIT
