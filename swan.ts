@@ -101,7 +101,7 @@ export const tag_generator =
 				if (k.startsWith("on")) {
 					html += ` data-swan-id="${element_id}"`;
 					const event_name = k.toLowerCase().slice(2);
-					js += `document.querySelector('[data-swan-id="${element_id}"]').addEventListener('${event_name}',(e)=>{${value}});
+					js += `document.querySelector('[data-swan-id="${element_id}"]').addEventListener('${event_name}',function(e){${value}});
 		            `;
 				} else {
 					const char_map: { [key: string]: string } = {
@@ -186,7 +186,13 @@ export const js = (strings: TemplateStringsArray, ...values: any[]) =>
 	strings.reduce((result, str, i) => {
 		const value = values[i];
 		if (value === undefined) return result + str;
-		return result + str + String(value);
+
+		const formatted =
+			typeof value === "string"
+				? `"${value.replace(/"/g, '\\"')}"` // Escape quotes in strings
+				: String(value);
+
+		return result + str + formatted;
 	}, "");
 
 export const css = (strings: TemplateStringsArray, ...values: any[]) =>
