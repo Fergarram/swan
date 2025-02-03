@@ -8,6 +8,12 @@ Unlike Van.js which is a reactive UI framework, Swan focuses on just helping you
 - No dependencies
 - No runtime dependencies
 - Tiny, readable and hackable.
+- Fast
+
+It took about 215,000ms for 200,000 pages with static data.
+
+215000ms / 200000 pages = 1.075ms per page
+≈ 930 pages per second
 
 ## Example Usage
 
