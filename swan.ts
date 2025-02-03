@@ -186,13 +186,7 @@ export const js = (strings: TemplateStringsArray, ...values: any[]) =>
 	strings.reduce((result, str, i) => {
 		const value = values[i];
 		if (value === undefined) return result + str;
-
-		const formatted =
-			typeof value === "string"
-				? `"${value.replace(/"/g, '\\"')}"` // Escape quotes in strings
-				: String(value);
-
-		return result + str + formatted;
+		return result + str + String(value);
 	}, "");
 
 export const css = (strings: TemplateStringsArray, ...values: any[]) =>
@@ -201,7 +195,6 @@ export const css = (strings: TemplateStringsArray, ...values: any[]) =>
 		if (value === undefined) return result + str;
 		return result + str + String(value);
 	}, "");
-
 
 //
 // File Renderer (optional)
@@ -220,6 +213,12 @@ export async function render({ out: out_dir, slug, html, js }: RenderOptions): P
 		await mkdir(dirname(js_path), { recursive: true });
 
 		// Write HTML file
+		let final_html = html;
+
+		if (!final_html.includes("<!DOCTYPE html>")) {
+			final_html = `<!DOCTYPE html>\n${final_html}`;
+		}
+
 		await writeFile(html_path, html, "utf-8");
 
 		// Only write JS file if there's JS content
