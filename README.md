@@ -1,13 +1,13 @@
 # Swan
-A tiny typescript template engine inspired by [Van.js](https://github.com/vanjs-org/van) with JavaScript event handling.
+A tiny typescript template engine inspired by [Van.js](https://github.com/vanjs-org/van).
 
 ## Description
-Swan is a minimalistic template engine that takes inspiration from Van.js's approach to building web interfaces, but focuses specifically on generating static HTML with associated JavaScript handlers. Unlike Van.js which is a reactive UI framework, Swan specializes in producing separate HTML and JavaScript output, making it particularly suitable for server-side rendering scenarios.
+Unlike Van.js which is a reactive UI framework, Swan focuses on just helping you create an interface tree that renders into strings of html and javascript. It provides a simple render function that writes html and js files to files under a directory.
 
 ## Features
 - No dependencies
 - No runtime dependencies
-- Tiny and readable
+- Tiny, readable and hackable.
 
 ## Example Usage
 
@@ -52,7 +52,7 @@ const list = ul(
   ...items.map((fruit, i) => 
     li(
       { 
-        onclick: js`console.log("Selected:", ${fruit})` 
+        onclick: js`console.log("Selected:", "${fruit}")` 
       },
       `${i + 1}. ${fruit}`
     )
