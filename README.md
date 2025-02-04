@@ -19,6 +19,8 @@ It took about 215,000ms for 200,000 pages with static data.
 215000ms / 200000 pages = 1.075ms per page
 ≈ 930 pages per second
 
+on my Macbook Air M1
+
 ## Example Usage
 
 ### Basic Example with Event Handler
