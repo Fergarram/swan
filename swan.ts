@@ -1,5 +1,5 @@
 //
-// Swan 1.0.0
+// Swan 1.0.1
 // by fergarram
 //
 
@@ -41,6 +41,7 @@ export type RenderOptions = {
 	slug: string;
 	html: string;
 	js: string;
+	use_html_dirs?: boolean;
 };
 
 export type Props = {
@@ -53,7 +54,10 @@ export type TagResult = {
 	js: string;
 };
 
-export type TagFunction = (props?: Props | string | TagResult, ...children: (TagResult | string)[]) => TagResult;
+export type TagFunction = (
+	props?: Props | string | null | undefined | TagResult,
+	...children: (TagResult | null | undefined | string)[]
+) => TagResult;
 
 export type TagsProxy = {
 	[key: string]: TagFunction;
@@ -164,19 +168,7 @@ export const tag_generator =
 		};
 	};
 
-// Yeah it looks funny...
-export const tags: TagsProxy = new Proxy(
-	() =>
-		new Proxy(
-			{},
-			{
-				get: tag_generator,
-			},
-		),
-	{
-		get: tag_generator,
-	},
-);
+export const tags: TagsProxy = new Proxy({}, { get: tag_generator });
 
 //
 // Code Literals
@@ -200,11 +192,15 @@ export const css = (strings: TemplateStringsArray, ...values: any[]) =>
 // File Renderer (optional)
 //
 
-export async function render({ out: out_dir, slug, html, js }: RenderOptions): Promise<void> {
+export async function render({ out: out_dir, slug, html, js, use_html_dirs = false }: RenderOptions): Promise<void> {
 	// Convert "/" to "index"
 	const normalized_slug = slug === "/" ? "index" : slug;
 
-	const html_path = join(out_dir, `${normalized_slug}.html`);
+	// Determine HTML path based on use_html_dirs option
+	const html_path = use_html_dirs
+		? join(out_dir, normalized_slug === "index" ? "index.html" : `${normalized_slug}/index.html`)
+		: join(out_dir, `${normalized_slug}.html`);
+
 	const js_path = join(out_dir, `${normalized_slug}.js`);
 
 	try {
@@ -219,7 +215,7 @@ export async function render({ out: out_dir, slug, html, js }: RenderOptions): P
 			final_html = `<!DOCTYPE html>\n${final_html}`;
 		}
 
-		await writeFile(html_path, html, "utf-8");
+		await writeFile(html_path, final_html, "utf-8");
 
 		// Only write JS file if there's JS content
 		if (js.trim()) {
