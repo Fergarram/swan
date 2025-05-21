@@ -1,4 +1,7 @@
 # Swan
+
+> **Note:** This project has evolved and is now [Ima](https://github.com/Fergarram/ima/tree/main)
+
 A tiny typescript template engine inspired by [Van.js](https://github.com/vanjs-org/van).
 
 ### Demo at [fernando.works](https://fernando.works)
